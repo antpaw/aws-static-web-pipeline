@@ -24,7 +24,14 @@ resource "aws_cloudfront_distribution" "distribution" {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD", "OPTIONS"]
     target_origin_id = var.cf_origin_id
-
+    lambda_function_association {
+      event_type = "origin-request"
+      lambda_arn = var.lambda_origin_request
+    }
+    # lambda_function_association {
+    #   event_type = "origin-response"
+    #   lambda_arn = var.redirect_from_s3_header_lambda_arn
+    # }
     compress               = true
     viewer_protocol_policy = "redirect-to-https"
     cache_policy_id        = var.s3_web_hosting_cache_policy_id

@@ -6,6 +6,10 @@ variable "acm_certificate_arn" {
   type = string
 }
 
+variable "lambda_origin_request" {
+  type = string
+}
+
 variable "aliases" {
   type    = list(any)
   default = []
